@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import FilmsList from "./components/FilmsList"
+import CharactersList from "./components/CharactersList"
 import { Container, Grid, GridColumn } from 'semantic-ui-react'
+import { getFilms } from './actions/films'
+import { connect } from "react-redux"
 
 class App extends Component {
+  
+  componentWillMount() {
+    this.props.getFilms()
+  }
+
   render() {
     return (
       <div className="App">
@@ -10,7 +18,8 @@ class App extends Component {
         <Container>
           <Grid centered columns={2}>
             <GridColumn>
-              <FilmsList />
+              <FilmsList data={this.props.films.data} />
+              <CharactersList />
             </GridColumn>
           </Grid>
         </Container>
@@ -19,4 +28,10 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps=(state)=>{
+  return {
+      films: state.films.data
+  }
+}
+
+export default connect(mapStateToProps, {getFilms})(App)

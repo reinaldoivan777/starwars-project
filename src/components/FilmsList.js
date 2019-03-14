@@ -1,21 +1,24 @@
 import React, { Component } from 'react'
-import { getFilms } from '../actions/films'
+import { getFilmIndex } from '../actions/films'
 import { connect } from "react-redux"
 import { Dropdown } from "semantic-ui-react"
+import { bindActionCreators } from "redux"
 
 class FilmsList extends Component {
-    componentWillMount() {
-        this.props.getFilms()
+    constructor() {
+        super()
+
+        this.filmSelect = this.filmSelect.bind(this)
     }
 
     filmSelect(e, data) {
-        console.log(data.value)
+        this.props.getFilmIndex(data.value)
     }
 
     render() {
         let films = []
-        if (this.props.films.data !== undefined)
-            films = this.props.films.data.results.map((film, index) => ({
+        if (this.props.data !== undefined)
+            films = this.props.data.results.map((film, index) => ({
                 key: index,
                 text: film.title,
                 value: index,
@@ -35,8 +38,14 @@ class FilmsList extends Component {
 
 const mapStateToProps=(state)=>{
     return {
-        films: state.films.data
+        filmIndex: state.films.filmIndex
     }
 }
+
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({
+        getFilmIndex: getFilmIndex
+    }, dispatch)
+}
   
-export default connect(mapStateToProps, {getFilms})(FilmsList);
+export default connect(mapStateToProps, {getFilmIndex})(FilmsList);

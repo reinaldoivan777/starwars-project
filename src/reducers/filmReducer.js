@@ -1,9 +1,11 @@
-const INITIAL_STATE = {data:{}}
+const INITIAL_STATE = {data:{}, filmIndex: 0}
 
 const filmReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case "GET_FILMS": 
-            return { ...state, data:action.payload }
+            return { ...state, data: action.payload }
+        case "FILM_INDEX": 
+            return { ...state, filmIndex: action.index }
         default:
             return state
     }

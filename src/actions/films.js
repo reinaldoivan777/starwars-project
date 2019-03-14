@@ -19,3 +19,10 @@ export const getFilmsSuccess = (data) => {
         payload: data
     }
 }
+
+export const getFilmIndex = (index) => {
+    return {
+        type: 'FILM_INDEX',
+        index
+    }
+}
