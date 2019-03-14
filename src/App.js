@@ -1,26 +1,22 @@
 import React, { Component } from 'react'
-import { getFilms } from './actions/films'
-import { connect } from "react-redux"
+import FilmsList from "./components/FilmsList"
+import { Container, Grid, GridColumn } from 'semantic-ui-react'
 
 class App extends Component {
-  
-  componentWillMount() {
-    this.props.getFilms()
-  }
-  
   render() {
     return (
       <div className="App">
-        <h1>Hello World</h1>
+        <h1>Star Wars</h1>
+        <Container>
+          <Grid centered columns={2}>
+            <GridColumn>
+              <FilmsList />
+            </GridColumn>
+          </Grid>
+        </Container>
       </div>
     );
   }
 }
 
-const mapStateToProps=(state)=>{
-  return {
-      films: state.films.data
-  }
-}
-
-export default connect(mapStateToProps, {getFilms})(App);
+export default App
