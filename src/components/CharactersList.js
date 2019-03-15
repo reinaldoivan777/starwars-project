@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux"
-import { Card } from "semantic-ui-react";
+import { Card, Modal } from "semantic-ui-react"
 import axios from 'axios'
+import StarshipsList from './StarshipsList'
 
 class CharactersList extends Component {
     constructor() {
@@ -43,11 +44,26 @@ class CharactersList extends Component {
                         (this.state.character.length > 0) ?
                             this.state.character.map((char, index) => {
                                 return (
-                                    <Card style={{width: "100%"}} key={index}>
-                                        <Card.Content>
-                                            <Card.Header content={char.data.name} />
-                                        </Card.Content>
-                                    </Card>
+                                    <Modal key={index} trigger={
+                                        <Card style={{width: "100%"}} key={index}>
+                                            <Card.Content>
+                                                <Card.Header content={char.data.name} />
+                                            </Card.Content>
+                                        </Card>
+                                    }>
+                                        {
+                                            (char.data.starships.length > 0) ?
+                                                    <Modal.Header>List of Starships</Modal.Header>
+                                            :
+                                                <Modal.Header>This Character Doesn't has a starship</Modal.Header>
+                                        }
+                                        {
+                                            (char.data.starships.length > 0) ?
+                                                <StarshipsList data={char.data.starships} />
+                                            :
+                                                ""
+                                        }
+                                    </Modal>
                                 )
                             })
                         :
