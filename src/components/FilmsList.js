@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { getFilmIndex } from '../actions/films'
 import { connect } from "react-redux"
 import { Dropdown } from "semantic-ui-react"
-import { bindActionCreators } from "redux"
 
 class FilmsList extends Component {
     constructor() {
@@ -42,10 +41,5 @@ const mapStateToProps=(state)=>{
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return bindActionCreators({
-        getFilmIndex: getFilmIndex
-    }, dispatch)
-}
   
 export default connect(mapStateToProps, {getFilmIndex})(FilmsList);

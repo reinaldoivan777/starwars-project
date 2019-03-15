@@ -1,4 +1,4 @@
-const INITIAL_STATE = {data:{}, filmIndex: 0}
+const INITIAL_STATE = {data:{}, filmIndex: -1}
 
 const filmReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
