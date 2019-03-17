@@ -19,7 +19,12 @@ class App extends Component {
           <Grid centered columns={2}>
             <GridColumn>
               <FilmsList data={this.props.films.data} />
-              <CharactersList />
+              {
+                (this.props.films.data !== undefined && this.props.filmIndex !== -1) ?
+                  <CharactersList data={this.props.films.data.results[this.props.filmIndex].characters} />
+                :
+                  ""
+              }
             </GridColumn>
           </Grid>
         </Container>
@@ -30,7 +35,8 @@ class App extends Component {
 
 const mapStateToProps=(state)=>{
   return {
-      films: state.films.data
+      films: state.films.data,
+      filmIndex: state.films.filmIndex
   }
 }
 

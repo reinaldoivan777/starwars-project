@@ -10,6 +10,10 @@ class StarshipsList extends Component {
         }
     }
 
+    componentWillMount() {
+        this.getStarships(this.props.data)
+    }
+
     getStarships(starships) {
         let promise = []
         starships.map(starshipURL => {
@@ -24,14 +28,13 @@ class StarshipsList extends Component {
     }
 
     render() {
-        this.getStarships(this.props.data)
         return (
             <Modal.Content>
                 <Card.Group>
                     {
-                        this.state.starships.map(starship => {
+                        this.state.starships.map((starship, index) => {
                             return (
-                                <Card>
+                                <Card key={index}>
                                     <Card.Content>
                                         <Card.Header content={starship.data.name} />
                                     </Card.Content>

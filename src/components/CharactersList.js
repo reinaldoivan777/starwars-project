@@ -12,16 +12,17 @@ class CharactersList extends Component {
         }
     }
     
-    componentWillMount() {
-        this.getCharacter()
-    }
+    // componentWillMount() {
+    //     this.getCharacter()
+    // }
     
 
-    getCharacter() {
+    getCharacter(characters) {
         let promise = []
-        if (this.props.films.data !== undefined && this.props.filmIndex !== -1) {
-            this.props.films.data.results[this.props.filmIndex].characters.map(url => {
-                promise.push(axios.get(url))
+        
+        if (characters !== undefined) {
+            characters.map(characterURL => {
+                promise.push(axios.get(characterURL))
             })
             Promise.all(promise)
                 .then(res => {
@@ -32,8 +33,11 @@ class CharactersList extends Component {
         }
     }
 
+    componentWillMount() {
+        this.getCharacter(this.props.data)
+    }
+
     render() {
-        this.getCharacter()
         return (
             <div style={{width: "100%", height: "auto", marginTop: 32, textAlign: "center"}}>
                 <h3 style={{color: "white"}}>
